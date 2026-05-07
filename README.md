@@ -1,358 +1,314 @@
-# 🛡 SentinelFirewall v5
-
-> **AI-Orchestrated Next-Generation Firewall Platform for Government & Enterprise Production Deployment**
-
-Developed independently by **Manaf AL-Dulaimi** · Copyright 2026 · All Rights Reserved
-
----
-
-## 📊 At a Glance
-
-| Metric | Value |
-|--------|-------|
-| Engine Subsystems | **42** |
-| AI Agents (24/7) | **6** |
-| JA4+ Fingerprints | **308,683** |
-| Red-Team Cycle | **Every 15 minutes** |
-| KEV Auto-Patch Speed | **< 15 minutes** |
-| Annual Cost | **~$12,000/yr** |
-| Full Install Time | **5 minutes** |
-| Health Check Points | **9/9** |
-
----
-
-## 🧠 AI Commander Architecture
-
-SentinelFirewall v5 runs a **hierarchical multi-agent AI system** powered by Anthropic's Claude models, with an optional fully sovereign on-premise AI layer.
+<div align="center">
 
 ```
-┌─────────────────────────────────────────┐
-│         AI COMMANDER (Opus 4.7)         │
-│   Coordinates all agents · High-level   │
-│              decisions                  │
-└──────────────────┬──────────────────────┘
-                   │
-     ┌─────────────┼─────────────┐
-     ▼             ▼             ▼
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-│Vuln Agent│ │Anomaly   │ │Malware   │ │Triage    │ │Monitor   │
-│Sonnet 4.6│ │Sonnet 4.6│ │Sonnet 4.6│ │Sonnet 4.6│ │Haiku 4.5 │
-└──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
-                   │
-     ┌─────────────┴──────────────┐
-     ▼                            ▼
-┌──────────────────┐   ┌─────────────────────┐
-│  PenTesterAgent  │   │    RedTeamHunter     │
-│ Opus 4.7·15 min  │   │  Opus 4.7 · 1 hour  │
-└──────────────────┘   └─────────────────────┘
-                   │
-     ┌─────────────▼──────────────┐
-     │    Ollama 70B (On-Prem)    │
-     │  Sovereign AI · 40GB Model │
-     │  Weekly MLTrainer fine-tune│
-     └────────────────────────────┘
+███████╗███████╗███╗   ██╗████████╗██╗███╗   ██╗███████╗██╗
+██╔════╝██╔════╝████╗  ██║╚══██╔══╝██║████╗  ██║██╔════╝██║
+███████╗█████╗  ██╔██╗ ██║   ██║   ██║██╔██╗ ██║█████╗  ██║
+╚════██║██╔══╝  ██║╚██╗██║   ██║   ██║██║╚██╗██║██╔══╝  ██║
+███████║███████╗██║ ╚████║   ██║   ██║██║ ╚████║███████╗███████╗
+╚══════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝
 ```
 
-All agent findings are logged to `ollama_teaching.jsonl` and used to continuously train the local 70B model. Over time, the local LLM progressively replaces cloud API calls — achieving **full sovereign AI operation with zero foreign cloud dependency**. This is the only firewall platform in the world with this capability.
+### **FIREWALL**
+
+*The world's first AI-native, self-pentesting, autonomous firewall*
 
 ---
 
-## 🔍 Detection & Prevention Engines
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Kali%20%7C%20Ubuntu-black?style=for-the-badge&logo=linux&logoColor=white)
+![AI](https://img.shields.io/badge/AI-Claude%20Opus%204.7%20%2B%20Sonnet%204.6%20%2B%20Haiku%204.5-red?style=for-the-badge&logo=anthropic&logoColor=white)
+![Engines](https://img.shields.io/badge/Engines-58%20Active-orange?style=for-the-badge)
+![Agents](https://img.shields.io/badge/AI%20Agents-8-crimson?style=for-the-badge)
+![Target](https://img.shields.io/badge/Target-Government%20%26%20Enterprise-darkred?style=for-the-badge)
+![Author](https://img.shields.io/badge/Author-Manaf%20AL--Dulaimi-white?style=for-the-badge)
+![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-black?style=for-the-badge)
 
-### 🔐 JA4+ TLS Fingerprinting
-Identifies **308,683 known software fingerprints** from live network traffic — including all known Command & Control (C2) frameworks used by threat actors. Stored in `ja4_db.sqlite`. Goes far beyond traditional IP or port-based blocking.
-
-**Tags:** `TLS Fingerprinting` `C2 Detection` `308K Signatures`
-
-### 🛡 Suricata IDS
-Full Suricata Intrusion Detection System runs as a dedicated process, reading EVE JSON logs in real-time. Detects intrusion patterns, protocol anomalies, and signature-based attacks across all network traffic.
-
-**Tags:** `Real-time IDS` `EVE JSON` `Signature-based`
-
-### ⚙️ nftables Kernel Firewall
-Linux kernel-level packet filtering with **47 active rule lines** loaded at boot. Handles stateful packet inspection, connection tracking, NAT, and port-based filtering at the kernel level — before traffic reaches any application.
-
-**Tags:** `47 Rules` `Kernel-level` `Stateful`
-
-### ⚡ eBPF / XDP Kernel Programs
-Extended Berkeley Packet Filter programs compiled into the Linux kernel for in-kernel traffic processing at line speed. XDP (eXpress Data Path) intercepts packets before the network stack — the fastest possible filtering layer.
-
-**Tags:** `eBPF` `XDP` `Line-speed`
-
-### 🚫 Rate-Limiting & Auto-Ban
-**3-strike rule** on all API endpoints — after 3 failed authentication attempts, the source IP is automatically banned. Prevents brute force, credential stuffing, and denial-of-service attempts.
-
-**Tags:** `3-Strike Rule` `Auto-Ban` `DoS Protection`
-
-### 🌍 Geo-Blocking
-Country-level traffic filtering configurable directly from the dashboard. Block entire nations or regions at the network level. Customer-specific blocked country lists can be set per deployment.
-
-**Tags:** `Country Blocking` `Dashboard Control` `Per-deployment`
+</div>
 
 ---
 
-## 🕸 Deception Engine & Honeypots
+## What Is Sentinel?
 
-SentinelFirewall v5 goes beyond detection — it actively deceives and fingerprints attackers.
+SentinelFirewall is not a traditional firewall. It is an **autonomous security platform** that combines classical network defense (nftables rules, Suricata IDS, eBPF XDP) with **8 Claude AI agents** that make real-time decisions, run penetration tests against the firewall itself every 15 minutes, and automatically apply the fixes — without any human involvement.
 
-| Honeypot | Port | Purpose |
-|----------|------|---------|
-| SSH Honeypot | `2222` | Captures SSH scanning, credential attempts, and attacker fingerprints |
-| HTTP Honeypot | `8080` | Captures web exploits, CVE probes, scanner fingerprints, and web shell attempts |
-| FTP Honeypot | `2121` | Detects legacy protocol probing — a strong indicator of automated threat toolkits |
+Built for **governments and large enterprises**. Designed to stay ahead of modern attackers who use AI tools to discover and exploit vulnerabilities.
 
-**DeceptionEngine** — Beyond static honeypots, the DeceptionEngine plants **customer-specific honeytokens** in relevant locations within the customer's environment. Any access to these tokens immediately signals a breach or insider threat. Honeytokens are customized per deployment during production rollout.
+> *"Most firewalls block traffic. Sentinel blocks traffic, finds its own weaknesses, and patches them — while you sleep."*
 
 ---
 
-## ⚡ AI Automation & Self-Healing
-
-### 🔄 CISA KEV Auto-Apply
-Monitors the CISA Known Exploited Vulnerabilities catalog continuously. When a new critical CVE is listed, Sentinel automatically applies the patch or mitigation **within 15 minutes** of publication — before most security teams have even read the alert.
-
-Default threshold: `CVSS ≥ 9.8`
-
-### 🔴 PenTesterAgent
-A dedicated Claude Opus 4.7 instance runs as a **continuous penetration tester** — probing the defended environment for vulnerabilities every **15 minutes**. Discovers novel attack vectors before adversaries do. All findings teach the Ollama 70B model.
-
-### 🕵️ RedTeamHunter
-Runs a comprehensive self-audit **every hour**. Simulates advanced persistent threat (APT) attack patterns against the protected network. Every finding is logged to `ollama_teaching.jsonl` — training the local AI to recognize and counter the same patterns.
-
-### 🧬 MLTrainer
-Fine-tunes the local Ollama 70B model on a **weekly schedule** using all accumulated teaching data. Over time, the model develops specialization in the specific threat landscape of the deployed environment — truly bespoke AI security intelligence.
-
----
-
-## 🔒 Security Hardening & Compliance
-
-### 🖥 Kernel Hardening
-**32 kernel sysctls** tuned for maximum security hardening:
-
-`ASLR = 2` `SYN Flood Protection` `IP Spoofing Defense` `ICMP Redirect Block` `Core Dump Disable` `32 Total Sysctls`
-
-### 🛡 AppArmor Sandboxing
-Mandatory Access Control via AppArmor profiles on all processes. Restricts what files, network sockets, and capabilities each process can access — even if an attacker achieves code execution, AppArmor limits lateral movement and damage.
-
-### 📋 auditd Audit Trail
-Complete system-level audit logging via Linux `auditd`. Records all system calls, file access, authentication events, and privilege escalations. Required for SIEM integration and compliance frameworks: **NIS2, DORA, BSI-Grundschutz, ISO 27001**.
-
-### 🔑 fail2ban
-Automated threat response for repeated authentication failures across all services. Monitors log files in real-time and dynamically updates firewall rules to ban IPs exceeding threshold.
-
-### 🔐 AES-256-GCM Secret Store
-All secrets — API keys, credentials, TLS private keys — stored in an encrypted secret store using AES-256-GCM authenticated encryption (`secrets.enc`). Immune to offline extraction without the master key.
-
-### 🌐 TLS on All Endpoints
-Full TLS encryption on all communication channels:
-
-| Endpoint | Port |
-|----------|------|
-| API Server | `8443` |
-| Dashboard | `8444` |
-| Live Data Bridge | `8445` |
-
-Certificate management via `server.crt / server.key` with CA-signed cert support.
-
----
-
-## 🌐 Network Security & Zero Trust
-
-### 🔐 ZTNA Policies
-Zero Trust Network Access policies for all customer applications. Every access request is authenticated and authorized regardless of network location — replacing legacy VPN-based perimeter models.
-
-### 🏢 DepartmentManager (Multi-Tenant)
-Multi-tenant isolation engine for MSP and MSSP deployments. Each department or customer gets a fully isolated security environment within the same Sentinel installation — enabling managed service delivery at scale.
-
-### ♻️ HAController (High Availability)
-High-Availability controller for failover support. Ensures Sentinel remains operational during hardware failure, maintenance windows, or network disruptions — critical for government and production environments.
-
-### 📊 Live Dashboard
-Web-based management dashboard on **port 8444**. Shows real-time threat data, agent status, geo-block map, honeypot triggers, and health indicators. All settings configurable through the UI with no CLI required.
-
-### 🔧 sentinel-ctl CLI
-Full command-line control interface:
-
-```bash
-sudo sentinel-ctl status     # View system status
-sudo sentinel-ctl logs       # Stream live logs
-sudo sentinel-ctl restart    # Restart all services
-sudo sentinel-ctl stop       # Graceful shutdown
-sudo sentinel-ctl test       # Run 9-point health check
-sudo sentinel-ctl dashboard  # Open web dashboard
-```
-
-Headless operation supported via `QT_QPA_PLATFORM=offscreen` for server environments.
-
-### 🔌 API Bridge
-Live data API bridge on **port 8445** feeds real-time telemetry to the dashboard and SIEM connectors. Runs as a dedicated systemd service with auto-restart on failure. Health endpoint available at `/api/v1/health`.
-
----
-
-## 📡 SIEM Integration
-
-Native connectors for **4 enterprise SIEM platforms**, configurable directly from the dashboard Settings tab — no config file editing required.
-
-| Platform | Type |
-|----------|------|
-| **Splunk** | Enterprise SIEM |
-| **Elastic** | ELK Stack / SIEM |
-| **QRadar** | IBM Security |
-| **Microsoft Sentinel** | Azure Cloud SIEM |
-
-Log forwarding begins immediately after configuration. The `sentinel.log` main log feeds all SIEM connectors in real-time via the API bridge on port 8445.
-
----
-
-## ✅ 9-Point Automated Health Check
-
-Run `sudo sentinel-ctl test` at any time to execute all 9 checks. Full validation completes in seconds.
+## The Core Innovation: The Self-Healing Loop
 
 ```
-[OK] Sentinel service active
-[OK] API responding on :8443
-[OK] Dashboard responding on :8444
-[OK] JA4+ database loaded: 308,683 fingerprints
-[OK] nftables: 47 rules loaded
-[OK] Suricata IDS process running
-[OK] Kernel hardening active (ASLR=2, SYN=1)
-[OK] Anthropic API key configured
-[OK] Live data API bridge responding (:8445)
+┌─────────────────────────────────────────────────────────────────┐
+│                     SENTINEL SELF-HEALING LOOP                  │
+│                                                                  │
+│   ┌──────────────┐   every 15 min   ┌──────────────────────┐   │
+│   │  PenTester   │ ─────────────────▶│  18-Phase Pentest   │   │
+│   │  Opus 4.7    │                   │  (network → AI       │   │
+│   └──────────────┘                   │   prompt injection)  │   │
+│          │                           └──────────┬───────────┘   │
+│          │                                      │               │
+│          ▼                                      ▼               │
+│   ┌──────────────────────────────────────────────────────────┐  │
+│   │           post_exploit_findings.json                     │  │
+│   └──────────────────────────────┬───────────────────────────┘  │
+│                                  │  every 60 seconds            │
+│                                  ▼                              │
+│   ┌──────────────┐    ┌──────────────────────┐                  │
+│   │  Commander   │◀───│  CommanderAutoFix    │                  │
+│   │  Opus 4.7    │    │  Safety Filter       │                  │
+│   └──────┬───────┘    └──────────────────────┘                  │
+│          │                                                       │
+│          ▼  applies: shell commands · nft rules · sysctl        │
+│   ┌──────────────────────────────────────────────────────────┐  │
+│   │                LIVE FIREWALL RULES                       │  │
+│   └──────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-Any failing check outputs a diagnostic message pointing to the relevant troubleshooting section.
+The PenTester finds weaknesses. The Commander fixes them. Both teach Ollama. **The firewall gets stronger every cycle.**
 
 ---
 
-## ⬡ All 42 Engine Subsystems
+## The 8 AI Agents
 
-<details>
-<summary><strong>Click to expand full subsystem list</strong></summary>
+| # | Agent | Model | Role |
+|---|---|---|---|
+| 1 | **Commander** | Claude Opus 4.7 | Final decision authority on every threat. Orchestrates all other agents. |
+| 2 | **Vulnerability Specialist** | Claude Sonnet 4.6 | Reads CVE/CISA KEV feeds. Auto-generates blocking rules within 15 min. |
+| 3 | **Anomaly Detector** | Claude Sonnet 4.6 | Behavioral baselining. Flags impossible logins, lateral movement, insider threats. |
+| 4 | **Malware Analyst** | Claude Sonnet 4.6 | Classifies sandbox samples. Identifies family, packer, crypto, and MITRE TTPs. |
+| 5 | **Triage Agent** | Claude Haiku 4.5 | Groups correlated events. Eliminates alert fatigue. |
+| 6 | **Continuous Monitor** | Claude Haiku 4.5 | Watches the firewall itself for configuration drift. |
+| 7 | **PenTester** | Claude Opus 4.7 | Rotates through 18 pentest phases every 15 minutes. Attacks itself. |
+| 8 | **RedTeam Hunter** | Claude Opus 4.7 | Hourly self-audit. Checks TLS config, eBPF flags, certificates. |
 
-**AI Layer**
-- AI Commander (Opus 4.7)
-- Vulnerability Agent (Sonnet 4.6)
-- Anomaly Agent (Sonnet 4.6)
-- Malware Agent (Sonnet 4.6)
-- Triage Agent (Sonnet 4.6)
-- Monitor Agent (Haiku 4.5)
-- PenTesterAgent (Opus 4.7 · Every 15 min)
-- RedTeamHunter (Opus 4.7 · Every 1 hour)
-
-**Sovereign AI**
-- Ollama 70B Local AI
-- MLTrainer (Weekly)
-- Teaching JSONL Logger
-
-**Detection**
-- JA4+ Fingerprint Engine
-- Suricata IDS
-- nftables Firewall
-- eBPF / XDP Processor
-- Geo-Block Engine
-- Rate-Limiter
-- Auto-Ban System
-
-**Deception**
-- SSH Honeypot
-- HTTP Honeypot
-- FTP Honeypot
-- DeceptionEngine
-- Honeytoken Deployer
-
-**Hardening**
-- AES-256-GCM SecretStore
-- AppArmor Sandboxer
-- auditd Audit Trail
-- fail2ban
-- Kernel Hardener (32 sysctls)
-- TLS Certificate Manager
-
-**Automation**
-- CISA KEV Auto-Patcher
-- ZTNA Policy Engine
-- DepartmentManager (Multi-tenant)
-- HAController (Failover)
-
-**Management**
-- Live Dashboard (Port 8444)
-- API Server (Port 8443)
-- Live Data Bridge (Port 8445)
-- sentinel-ctl CLI
-
-**SIEM Connectors**
-- Splunk SIEM Connector
-- Elastic SIEM Connector
-- QRadar SIEM Connector
-- MS Sentinel Connector
-
-**Monitoring**
-- 9-Point Health Check Engine
-
-</details>
+Each agent is paired with a **local Ollama 70B student model** that learns from every Claude decision. After sufficient training, agents operate entirely offline without Claude API calls.
 
 ---
 
-## 📊 Competitive Comparison
+## The Teaching Loop → Ollama Independence
 
-| Capability | SentinelFirewall v5 | Palo Alto | Fortinet | Check Point | Sophos |
-|-----------|---------------------|-----------|----------|-------------|--------|
-| Engine Subsystems | **42** | ~15 | ~12 | ~14 | ~8 |
-| AI Commander (Multi-Agent) | ✅ Opus 4.7 + 5 agents | ◑ Partial ML | ◑ Partial AI | ✗ | ✗ |
-| Sovereign / Offline AI (On-Prem LLM) | ✅ Ollama 70B | ✗ | ✗ | ✗ | ✗ |
-| Automated Red-Teaming (15 min cycle) | ✅ | ✗ | ✗ | ✗ | ✗ |
-| CISA KEV Auto-Patch (< 15 min) | ✅ | ✗ | ✗ | ✗ | ✗ |
-| JA4+ Fingerprinting (308K sigs) | ✅ 308,683 | ◑ Partial | ✗ | ◑ Partial | ✗ |
-| Built-in IDS (Suricata) | ✅ | ✗ | ◑ Partial | ✗ | ✗ |
-| Deception / Honeypots | ✅ 3 honeypots + tokens | ✗ | ✗ | ✗ | ✗ |
-| Source Code Ownership | ✅ Full IP transfer | ✗ | ✗ | ✗ | ✗ |
-| SIEM Integration | ✅ 4 platforms | ✅ | ✅ | ✅ | ◑ |
-| ZTNA Policies | ✅ | ✅ | ✅ | ✅ | ✗ |
-| Multi-Tenant (MSP/MSSP) | ✅ DepartmentManager | ✅ | ✅ | ◑ | ✗ |
-| Kernel Hardening (32 sysctls) | ✅ | ✗ | ✗ | ✗ | ✗ |
-| 5-Minute Install / Single Command | ✅ | ✗ Days/weeks | ✗ Days | ✗ Days | ✗ |
-| **Approx. Annual Cost** | **~$12,000/yr** | $300K–$2M | $200K–$800K | $250K–$1M | $50K–$200K |
-
----
-
-## 🚀 Deployment & System Requirements
-
-### Minimum Requirements
-| Component | Minimum |
-|-----------|---------|
-| OS | Ubuntu 24.04 LTS |
-| RAM | 8 GB |
-| Disk | 50 GB |
-| CPU | 4 Cores |
-| Network | 1 Gbps NIC |
-| Access | Root |
-
-### Recommended (with Ollama 70B)
-| Component | Recommended |
-|-----------|-------------|
-| OS | Ubuntu 24.04 LTS |
-| RAM | 64 GB |
-| Disk | 200 GB SSD |
-| CPU | 8+ Cores |
-| Network | 10 Gbps SFP+ |
-| GPU | Optional (5–10× AI speed) |
-
-### Installation
-
-```bash
-sudo bash install.sh
+```
+Claude Agent makes decision
+         │
+         ▼
+/var/lib/sentinel/ollama_teaching.jsonl
+         │
+         │  after 24h + 50 records
+         ▼
+    MLTrainer Engine
+         │
+         ▼
+Fine-tuned local Ollama model (per agent)
+         │
+         ▼
+Firewall operates OFFLINE · No API cost · No internet dependency
 ```
 
-The installer auto-detects network interface, home CIDR, and OS variant (Ubuntu vs Kali). It asks only **6 questions** with sensible defaults. Full deployment including all 42 subsystems completes in:
-
-- **5 minutes** — without Ollama
-- **30+ minutes** — with the 70B model download
+After a few weeks of operation, **the firewall runs on your own hardware with your own models** — cheaper, faster, and air-gapped capable.
 
 ---
 
-## 📜 License
+## The Malware Analysis Pipeline
 
-Source code is provided to the customer under a **negotiated commercial license**. Full IP transfer available.
+A full IDA Pro-style analysis pipeline that runs in under **10 seconds per sample**.
+
+```
+Suspicious File
+      │
+      ▼
+┌─────────────────────────────────────────────────────┐
+│  STAGE 1 — Static Analysis (IDA Engine)              │
+│  ■ Capstone disassembly (x86/x64/ARM64/ARMv7/MIPS)  │
+│  ■ Unicorn CPU emulation                             │
+│  ■ LIEF header parsing (PE/ELF/Mach-O)               │
+│  ■ Shannon entropy, string extraction, IOC regex     │
+│  ■ Control flow graph construction                   │
+│  ■ Decryption stub identification & classification   │
+│    (XOR-loop, ChaCha-ARX, AES, RC4, custom)         │
+│  ■ Anti-debug / anti-VM / anti-emulation detection   │
+└───────────────────────────┬─────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────┐
+│  STAGE 2 — Dynamic Analysis (Sandbox Detonator)      │
+│  ■ bubblewrap (--unshare-all) + strace               │
+│  ■ firejail (--seccomp --net=none) fallback          │
+│  ■ Syscall capture: file / process / network / mem   │
+│  ■ Filesystem delta before/after                     │
+│  ■ Runtime cap: 8 seconds                            │
+└───────────────────────────┬─────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────┐
+│  STAGE 3 — AI Classification (Polymorphic Analyzer)  │
+│  ■ Claude Opus 4.7 verdict                           │
+│  ■ Family · Variant · Packer · Crypto family         │
+│  ■ Malicious score 0.0–1.0 · MITRE ATT&CK TTPs      │
+│  ■ Auto-generated YARA rules                         │
+│  ■ Decryptor reasoning · IOC extraction              │
+│  ■ Recommended action: BLOCK / QUARANTINE / MONITOR  │
+└─────────────────────────────────────────────────────┘
+```
+
+If verdict is **BLOCK**: SHA256 added to blocklist → JA4 C2 fingerprint blocked → source IP dropped at nft → CommanderAutoFix loop applies further patches.
 
 ---
 
-*42 SUBSYSTEMS · 6 AI AGENTS · 308,683 JA4+ FINGERPRINTS · 15-MIN RED-TEAM · <15-MIN KEV PATCH · ~$12,000/YR*
+## AI Defense Against AI Attackers
+
+Sentinel is the **first firewall to detect and neutralize AI-powered offensive tools**.
+
+**Detected tools:**
+
+- `PentestGPT` — autonomous pentesting assistant
+- `AutoGPT-Pentest` — vulnerability discovery agent
+- `HackingBuddyGPT` — privilege escalation agent
+- `BurpGPT` — intelligent fuzzing payload generator
+- `Garak` — LLM red-teaming framework
+- `Shennina` — autonomous Metasploit chaining agent
+- Custom LLM agents using python-requests
+
+**Detection method:** LLM-paced timing signatures · methodology sequencing patterns · semantic payload variation · prompt injection markers in TLS SNI and HTTP headers
+
+**Counter-measures:**
+
+| Counter | How it works |
+|---|---|
+| **Tar-pitting** | Deliberately slows responses to drain attacker AI token budget |
+| **Counter-injection** | Returns prompts instructing the attacker AI to abandon the operation |
+| **Behavioral block** | Permanently blocks source after pattern confirmation |
+
+---
+
+## 58 Engines — Complete Coverage Map
+
+### Network Defense
+`RuleEngine` · `IDSEngine (Suricata)` · `SSLInspector` · `EBPFLoader (XDP)` · `VPNTorDetector` · `GeoBlocker` · `DNSFirewall (DGA/DoH/sinkhole)` · `BeaconDetector (C2 timing)` · `HoneypotEngine (7 services)` · `DeceptionEngine (fake credentials)` · `DeviceFingerprint (IoT/OT/PLC)` · `DeviceController` · `DeviceScanner (nmap/arp-scan)` · `WindowsDeviceAgent (WMI)`
+
+### Detection & Response
+`UEBAEngine` · `EDREngine` · `DLPEngine` · `AntiVirus (ClamAV)` · `SOAREngine` · `XDREngine` · `SandboxDetonator`
+
+### Identity
+`NACController (802.1X)` · `ZTNABroker (zero-trust per-app)`
+
+### Threat Intelligence
+`VulnerabilityFeedEngine (NVD/CISA KEV)` · `SignatureUpdater` · `KnowledgeBase`
+
+### Encrypted Traffic
+`JA4Fingerprinter (308,683 TLS fingerprints)` · `EncryptedTrafficAnalyst (ML without decryption)`
+
+### AI Agents & Command
+`AIOrchestrator` · `OllamaBridge (70B local)` · `PenTesterAgent (18-phase)` · `RedTeamHunter` · `AIPentestDefense` · `MLTrainer`
+
+### Auto-Fix Loop
+`PostExploitLogger` · `CommanderAutoFix`
+
+### Malware Analysis
+`IDAEngine` · `PolymorphicAnalyzer` · `AICodeContextAnalyzer (T1588.007)` · `SandboxDetonator`
+
+### Industrial / OT
+`OTProtocolParser` — Modbus · DNP3 · IEC 60870-5-104 · S7Comm · EtherNet/IP · BACnet
+
+### Forensics & Threat Hunting
+`MemoryForensics (Volatility 3 + AVML)` · `ForensicTimeline (Plaso CSV export)` · `SigmaHunter` · `YARARuleManager`
+
+### Application & Cloud & Email
+`WAFEngine (SQLi/XSS/LFI/SSRF)` · `ContainerSecurity (Falco + Docker scan)` · `EmailDLP (rspamd + regex)`
+
+### External Intelligence
+`DarkwebMonitor (HIBP + paste-site scraping)` · `D3FENDMapper (ATT&CK → D3FEND countermeasures)`
+
+### Reporting & Integration
+`AlertManager (Slack/email/syslog)` · `SIEMConnector (Splunk/Elastic/QRadar)` · `APIServer (REST :8443)` · `CloudConnector (AWS/Azure/GCP)`
+
+### Infrastructure
+`FirewallEngine` · `HAController (active/passive failover)` · `DepartmentManager (multi-tenant)` · `SecretStore (AES-256-GCM)` · `PythonBridge`
+
+---
+
+## What Sentinel Protects Against
+
+### Traditional Attacks
+- DDoS · Port scans · Brute force
+- Known CVEs — **auto-patched within 15 minutes** from CISA KEV feed
+- Malware in files via sandbox detonation
+- C2 beacons via timing-based ML detection
+- Data exfiltration via DLP scanning
+
+### AI-Powered Attacks *(Industry First)*
+- AI pentesting tools discovering vulnerabilities autonomously
+- LLM-generated fuzzing payloads that vary semantically
+- Prompt injection embedded in TLS SNI or HTTP headers
+- Model extraction probes against your AI services
+- RAG poisoning in uploaded documents
+
+---
+
+## Web Dashboard
+
+Access at `http://your-ip:8444`
+
+| Tab | What you see |
+|---|---|
+| Overview | Threat stream · AI decisions · real-time counters |
+| Engines (48) | All engine health status |
+| AI Agents | 8 Claude agents + paired Ollama students |
+| Threat Feed | Recent blocks |
+| JA4+ | TLS fingerprint identifications |
+| Network Devices | Discovered hosts with quarantine buttons |
+| IDS/IPS | Suricata recent alerts |
+| Rules | Current nft rules |
+| Vulnerabilities | CVE auto-patch status |
+| UEBA / EDR | Anomalies and process events |
+| Geo Block | Country blocking visualization |
+| Red-Team Audit | Hourly self-pentest findings |
+| PenTester | 18-phase methodology · current phase · recent vectors |
+| Post-Exploit | Findings file · auto-fixed count · fix history |
+| IDA Engine | Disassembly stats · decryption stubs |
+| Polymorphic | Sample verdicts · packer family · Ollama independence |
+| AI Context | AI-using malware detection (T1588.007) |
+| AI Defense | Detected AI pentest tools · tar-pit · counter-injection |
+| Honeypots | Hits on the 7 fake services |
+| Settings | Edit config through the UI |
+| Live Logs | Tail of all logs |
+
+---
+
+## REST API
+
+Sentinel exposes a full REST API on port **8443** for integration with SIEM platforms, SOAR tools, and custom automation.
+
+SIEM integrations: **Splunk · Elastic (ELK) · IBM QRadar**
+Cloud integrations: **AWS · Microsoft Azure · Google Cloud**
+
+---
+
+
+
+## System Requirements
+
+| Component | Requirement |
+|---|---|
+| OS | Kali Linux or Ubuntu (latest LTS) |
+| CPU | 8+ cores recommended |
+| RAM | 16 GB minimum · 32 GB recommended (Ollama 70B requires 40+ GB) |
+| Disk | 50 GB minimum |
+| Network | Root access or CAP_NET_ADMIN capability |
+| API | Anthropic API key (for Claude agents) |
+| Optional | Ollama installed for local model inference |
+
+---
+
+<div align="center">
+
+---
+for Details 
+monaf.aldawan@proton.me
+**© 2026 Manaf AL-Dulaimi. All rights reserved.**
+
+*SentinelFirewall — Built for those who cannot afford to be breached.*
+
+</div>
