@@ -1,5 +1,5 @@
 <div align="center">
-
+Firewall is still under devoloping 
 ```
 ███████╗███████╗███╗   ██╗████████╗██╗███╗   ██╗███████╗██╗
 ██╔════╝██╔════╝████╗  ██║╚══██╔══╝██║████╗  ██║██╔════╝██║
@@ -51,7 +51,7 @@ Built for **governments and large enterprises**. Designed to stay ahead of moder
 │          │                                      │               │
 │          ▼                                      ▼               │
 │   ┌──────────────────────────────────────────────────────────┐  │
-│   │           post_exploit_findings.json                     │  │
+│   │           post_exploit_findings.                         │  │
 │   └──────────────────────────────┬───────────────────────────┘  │
 │                                  │  every 60 seconds            │
 │                                  ▼                              │
@@ -94,7 +94,7 @@ Each agent is paired with a **local Ollama 70B student model** that learns from 
 Claude Agent makes decision
          │
          ▼
-/var/lib/sentinel/ollama_teaching.jsonl
+  ollama_teaching
          │
          │  after 24h + 50 records
          ▼
@@ -249,7 +249,7 @@ Sentinel is the **first firewall to detect and neutralize AI-powered offensive t
 
 ## Web Dashboard
 
-Access at `http://your-ip:8444`
+Access at `http://your-ip:XXXX`
 
 | Tab | What you see |
 |---|---|
@@ -292,7 +292,7 @@ Cloud integrations: **AWS · Microsoft Azure · Google Cloud**
 
 | Component | Requirement |
 |---|---|
-| OS | Kali Linux or Ubuntu (latest LTS) |
+| OS | Linux (latest LTS) |
 | CPU | 8+ cores recommended |
 | RAM | 16 GB minimum · 32 GB recommended (Ollama 70B requires 40+ GB) |
 | Disk | 50 GB minimum |
