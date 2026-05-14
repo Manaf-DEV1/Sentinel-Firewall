@@ -28,7 +28,7 @@
 
 SentinelFirewall is a **Linux-native, headless security platform** written in modern C++17 with Qt 6. It is not a traditional firewall. It combines capabilities that most security products keep in separate tools — all compiled into a single binary, managed by a single daemon, correlated by a single AI council.
 
-> Built and tested against government and industrial threat models — energy, financial sector, and government enterprise environments.
+> Built for government and industrial threat models — energy, financial sector, and government enterprise environments.
 
 ---
 
