@@ -83,6 +83,7 @@ This README is the master reference for what each engine does.
 High-level architecture
 ========================
 
+
   +---------------------------------------------------------------+
   |                       Web Dashboard                            |
   |  (Python Flask app on :8444 — index.html + dashboard_api.py)  |
