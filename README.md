@@ -173,7 +173,7 @@ Token touched
 **62 engines · ~35,000 lines**
 
 <details>
-<summary><b>🔵 STRONG tier — 25 engines (500+ lines each)</b></summary>
+<summary><b>🔵 STRONG tier — 28 engines (500+ lines each)</b></summary>
 
 | Engine | LOC | What it does |
 |--------|-----|--------------|
