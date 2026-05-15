@@ -359,9 +359,9 @@ sudo journalctl -fu sentinel
 | Version | Target | Status |
 |---------|--------|--------|
 | **v9.13** | DeceptionEngine — 17 honeytokens, tripwire, 3-way forwarding | ✅ Done |
-| v9.14 | DepartmentManager hardening | 🔜 Next |
-| v9.15 | DarkwebMonitor hardening | 🔜 Planned |
-| v9.16 | D3FENDMapper hardening | 🔜 Planned |
+| v9.14 | DepartmentManager hardening | ✅ Done |
+| v9.15 | DarkwebMonitor hardening | ✅ Done |
+| v9.16 | D3FENDMapper hardening | ✅ Done |
 
 After **v9.16**: all 62 engines at GOOD or STRONG — no THIN, no STUB. ~36,000 lines.
 
