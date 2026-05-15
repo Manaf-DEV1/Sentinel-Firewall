@@ -210,6 +210,8 @@ Token touched
 | `EncryptedTrafficAnalyst` | 499 | JA4 + cert chain + SNI + ratio analysis — C2-over-TLS without decryption |
 | `VPNTorDetector` | 495 | IP reputation + TLS fingerprint — VPN provider and Tor exit node detection |
 | `IDSEngine` | 788 | Suricata-format IDS — TCP/UDP/ICMP/HTTP/DNS/TLS/SMB/FTP decoders |
+| `DepartmentManager` | 208 | Cross-department audit policies needed |
+| `D3FENDMapper` | 182 | MITRE D3FEND coverage queries needed |
 
 </details>
 
@@ -258,12 +260,7 @@ Token touched
 </details>
 
 <details>
-<summary><b>🔴 THIN tier — 2 engines (next to be hardened)</b></summary>
-
-| Engine | LOC | Status |
-|--------|-----|--------|
-| `DepartmentManager` | 208 | Cross-department audit policies needed |
-| `D3FENDMapper` | 182 | MITRE D3FEND coverage queries needed |
+<summary><b>🔴 THIN tier — 0 engines (next to be hardened)</b></summary>
 
 </details>
 
