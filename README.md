@@ -347,6 +347,6 @@ Inline gateway (Squid → ICAP): [`INLINE_GATEWAY.md`](INLINE_GATEWAY.md) · per
 
 Built by **Manaf AL-Dulaimi** — a deep-dive into systems programming and security engineering: an inline malware-analysis pipeline, an AI verdict layer with real governance, and a test suite that proves it (detection, fuzzing, attack-surface audit).
 
-**Interested in the work or want to talk?** Open an issue or reach out: *[add your email / LinkedIn here]*.
+**Interested in the work or want to talk?** Open an issue or reach out: monaf.aldawan@proton.me .
 
 EICAR test string courtesy of [eicar.org](https://www.eicar.org/). Built on rizin, capstone, ClamAV, YARA, Suricata, bubblewrap, Qt 6, and the Anthropic API.
