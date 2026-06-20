@@ -200,6 +200,44 @@ Three rules run through everything: **behavior over surface** (what it imports/d
 
 ---
 
+## 🧠 The AI Orchestrator — Claude as the firewall's brain
+
+Above the deterministic pipeline sits an **AI orchestration layer**. **Claude Opus 4.8 acts as the "commander,"** delegating to role-specialized Claude agents (vulnerability, anomaly, malware, log-triage) and a fast **Claude Haiku** monitor, with **Claude Sonnet** as the synchronous malware arbiter. It is **off by default and fully gated on your Anthropic API key** — set it once in the desktop GUI (AI tab), no config files or terminal needed. With no key the firewall still detects and blocks with **zero AI**; the orchestrator is an *augmentation* that adds reasoning, attribution, and bounded autonomous response on top.
+
+Here is what it actually does — every quote below is a verbatim line from a real run log:
+
+**1 · Final malware arbiter (fail-closed).** When a download is *locally suspicious but not definitive*, the verdict is escalated to Claude, which weighs imports + anti-analysis strings + decompiler output + sandbox behaviour and returns a judgement with **family attribution**:
+> `[AI-Arbiter] Claude verdict=MALICIOUS threat=7 conf=0.72 family=Unknown/Suspected Injector-Ransomware Hybrid (13883ms)`
+
+If Claude can't be reached, the caller **fails closed** — the file is held, never blindly released:
+> `[AI-Arbiter] No Anthropic API key — cannot reach Claude; caller will FAIL-CLOSED (hold the file).`
+
+**2 · Bounded autonomous response.** The commander can act on its own conclusions — and every action is rate-limited, audit-logged, and killable via the API. In one run it isolated compromised devices, triggered remediation playbooks, and authored **20 context-aware firewall / DPI / WAF rules** for an OT/ICS network it was reasoning about:
+> `[AI-ACTION] Claude added rule: DENY all inbound TCP/502 (Modbus) from any non-OT VLAN — restrict to engineering`
+> `[AI-ACTION] Claude added rule: DPI signature: drop Modbus payload matching TM221 password-disclosure probe`
+> `[AI-ACTION] Claude triggered playbook: PB_OT_HARDENING_AND_PATCH_CYCLE`
+> `[AI-ACTION] Claude ISOLATED device : Claude AI directive`
+
+**3 · Continuous self-red-team.** A PenTester agent drives Claude Opus through a multi-phase offensive lifecycle (recon → scanning → exploitation → …) against the firewall's **own** posture, scoring each vector for severity / novelty / exploitability and feeding concrete mitigations back to the commander:
+> `[PenTester:Reconnaissance] GitHub/GitLab Secret & Config Leakage via Dependency Graph Pivoting - severity=CRITICAL novelty=0.65 exploitability=0.90`
+> `[PenTester->Commander] … mitigation=bridge API must require mTLS client cert PLUS rotating HOTP token`
+
+**4 · Teacher → student corpus.** Every Claude verdict is appended as a structured training example — **features only, never raw sample bytes** — to `…/ai-corpus/decisions.jsonl`, so a local **Ollama "student" model** can be distilled from the cloud "teacher" over time.
+
+### Safety model — autonomy on a leash
+| Guardrail | What it enforces |
+|---|---|
+| **Key-gated** | No Anthropic key → the orchestrator stays dormant; core detection is unaffected. |
+| **Fail-closed** | Arbiter unreachable → suspicious files are **held**, never released. |
+| **Rate-limited + kill switch** | Autonomous actions are capped per minute and can be disabled instantly: `POST /api/v1/ai/actions/enabled {"enabled":false}`. |
+| **Audited** | Every action is written to `ai-actions.jsonl`. |
+| **Loopback-only** | The AI control API binds to `127.0.0.1` — invisible to the network. |
+
+### The honest boundary
+The orchestrator's reasoning is **Claude-driven** (the local Ollama path is optional, used for the student model and fallbacks). It needs egress to `api.anthropic.com` and is subject to API rate limits — under a heavy burst you'll see `429` backpressure on the busiest agents. It is a force-multiplier **on top of** deterministic detection, not a replacement for it: turn the key off and the firewall still catches malware; turn it on and it gains a reasoning analyst that never sleeps.
+
+---
+
 ## 🧬 Catching polymorphic & AI-polymorphic malware
 
 This is the part people ask about, so here's the technique and the defeat — exactly. (Test samples use the harmless **EICAR** marker as a stand-in payload, so the *mechanism* is exercised without real malware.)
@@ -347,6 +385,6 @@ Inline gateway (Squid → ICAP): [`INLINE_GATEWAY.md`](INLINE_GATEWAY.md) · per
 
 Built by **Manaf AL-Dulaimi** — a deep-dive into systems programming and security engineering: an inline malware-analysis pipeline, an AI verdict layer with real governance, and a test suite that proves it (detection, fuzzing, attack-surface audit).
 
-**Interested in the work or want to talk?** Open an issue or reach out: monaf.aldawan@proton.me .
+**Interested in the work or want to talk?** Open an issue or reach out: *[add your email / LinkedIn here]*.
 
 EICAR test string courtesy of [eicar.org](https://www.eicar.org/). Built on rizin, capstone, ClamAV, YARA, Suricata, bubblewrap, Qt 6, and the Anthropic API.
