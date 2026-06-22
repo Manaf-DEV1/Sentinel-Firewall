@@ -340,7 +340,7 @@ Audits which ports are network-visible, confirms the nftables anti-scan ruleset,
 | Home / lab / single host | ✅ Yes | Real download-inspection + scan-blocking. Clean files sub-second; executables a few seconds. Handles personal/lab volume comfortably. |
 | Small office / SMB (behind a proxy) | ✅ As a layer | A genuine defense-in-depth file gateway with an API key + tuning. Pair it with a normal firewall + endpoint protection — not a sole control. |
 | Education / CTF / research | ✅ Excellent | One of the clearest self-hostable, readable demonstrations of AI-assisted malware triage. |
-| Enterprise / regulated / high-throughput | ❌ Not as the primary control | No certs, vendor support, intel-at-scale, or proven HA. Fits as a research/triage component inside a larger stack. |
+| Enterprise / regulated / high-throughput | ❌ Not as the primary control | still in test version |
 
 **Operating constraints, stated plainly:** inline HTTP works out of the box, HTTPS needs Squid SSL-bump; the AI arbiter needs an Anthropic key (BYO, per-use — fail-closed without it); the sandbox observes a time window; it's a single-host engine (~8 concurrent analyses), not built for line-rate enterprise traffic. Inside that envelope, it does the job — and the results above prove it.
 
